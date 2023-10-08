@@ -3,6 +3,7 @@
 bool boxCollider2D::initColliderPosition(sceneManager* manager, int eId)
 {
 	// basic debounce
+	currentWorld = manager->getCurrent();
 	if(this->aEntityAssigned == -1)
 		this->aEntityAssigned = eId;
 	if (aEntityAssigned != -1)
@@ -29,26 +30,10 @@ bool boxCollider2D::updateColliderPosition(sceneManager* manager)
 		if (manager->getCurrent()->getEntity(this->aEntityAssigned)->getComponentEX<transform*>() != nullptr)
 		{
 			// entity has a transform
-			if (manager->getCurrent()->getEntity(aEntityAssigned)->getComponentEX<Camera*>() != nullptr)
-			{
-				this->colliderRect.x = (manager->getCurrent()->getEntity(aEntityAssigned)->getComponentEX<transform*>()->position.x - 
-					manager->getCurrent()->getEntity(aEntityAssigned)->getComponentEX<Camera*>()->getCameraSize().x);
-				this->colliderRect.y = (manager->getCurrent()->getEntity(aEntityAssigned)->getComponentEX<transform*>()->position.y -
-					manager->getCurrent()->getEntity(aEntityAssigned)->getComponentEX<Camera*>()->getCameraSize().y);
-				this->colliderRect.w = manager->getCurrent()->getEntity(aEntityAssigned)->getComponentEX<transform*>()->w;
-				this->colliderRect.h = manager->getCurrent()->getEntity(aEntityAssigned)->getComponentEX<transform*>()->h;
-				
-			}
-			else {
-				Camera* cCamera = dynamic_cast<Camera*>(manager->getCurrentCamera());
-				this->colliderRect.x = manager->getCurrent()->getEntity(aEntityAssigned)->getComponentEX<transform*>()->position.x -
-					cCamera->getCameraSize().x;
-					this->colliderRect.y = manager->getCurrent()->getEntity(aEntityAssigned)->getComponentEX<transform*>()->position.y -
-					cCamera->getCameraSize().y;
-				this->colliderRect.w = manager->getCurrent()->getEntity(aEntityAssigned)->getComponentEX<transform*>()->w;
-				this->colliderRect.h = manager->getCurrent()->getEntity(aEntityAssigned)->getComponentEX<transform*>()->h;
-			}
-
+			this->colliderRect.x = manager->getCurrent()->getEntity(aEntityAssigned)->getComponentEX<transform*>()->position.x;
+			this->colliderRect.y = manager->getCurrent()->getEntity(aEntityAssigned)->getComponentEX<transform*>()->position.y;
+			this->colliderRect.w = manager->getCurrent()->getEntity(aEntityAssigned)->getComponentEX<transform*>()->w;
+			this->colliderRect.h = manager->getCurrent()->getEntity(aEntityAssigned)->getComponentEX<transform*>()->h;
 			return true;
 		}else { 
 		std::cout << "Object does not have a transform!" << std::endl;

@@ -2,6 +2,7 @@
 #include "component.h"
 #include "position2D.h"
 #include "Camera.h"
+#include "renderedPosition.h"
 class sprite : public component
 {
 private:
@@ -26,12 +27,18 @@ public:
 	{
 		if (inited == true)
 		{
-			if (entityAssigned->getComponentEX<Camera*>() != nullptr)
+			if (entityAssigned->getComponentEX<renderedPosition*>() != nullptr && entityAssigned->getComponentEX<transform*>() != nullptr)
 			{
-				this->rect = { (int)transform2D->position.x - entityAssigned->getComponentEX<Camera*>()->getCameraSize().x
-					,(int)transform2D->position.y- entityAssigned->getComponentEX<Camera*>()->getCameraSize().y
-					,transform2D->w,transform2D->h };
+				int diffx = transform2D->position.x - (int)entityAssigned->getComponentEX<renderedPosition*>()->position.x;
+				int diffy = transform2D->position.y - (int)entityAssigned->getComponentEX<renderedPosition*>()->position.y;
+				this->rect = { (int)entityAssigned->getComponentEX<renderedPosition*>()->position.x - diffx
+							  ,(int)entityAssigned->getComponentEX<renderedPosition*>()->position.y - diffy
+						      ,transform2D->w,transform2D->h };
+				std::cout << (int)entityAssigned->getComponentEX<renderedPosition*>()->position.x << std::endl;
 				img.createImage(renderer, rect, transform2D->angle);
+			}
+			else {
+				std::cout << " no rendered position!!" << std::endl;
 			}
 		}
 	}
@@ -41,15 +48,22 @@ public:
 		if (e->getComponentEX<transform*>() != nullptr) // why do i check twice?
 		{
 			this->entityAssigned = e;
-			if (e->getComponentEX<transform*>() != nullptr)
+			this->transform2D = e->getComponentEX<transform*>();
+			if (e->getComponentEX<renderedPosition*>() != nullptr)
 			{
-				this->transform2D = e->getComponentEX<transform*>();
-				this->rect = { (int)transform2D->position.x,(int)transform2D->position.y,transform2D->w,transform2D->h };
+				if (e->getComponentEX<transform*>() != nullptr)
+				{
+					this->rect = { (int)entityAssigned->getComponentEX<renderedPosition*>()->position.x,(int)entityAssigned->getComponentEX<renderedPosition*>()->position.y,transform2D->w,transform2D->h };
+				}
+				if (path != "NULL")
+				{
+					img.setPath(path);
+				}
+
 			}
-			if (path != "NULL")
-			{
-				img.setPath(path);
-			}
+		}
+		else {
+			std::cout << "no RenderedPosition" << std::endl;
 		}
 	}
 

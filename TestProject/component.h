@@ -4,7 +4,7 @@
 #include "image.h"
 #include "entity.h"
 
-struct transform : public component
+struct transform : public component // all a transform is a world position.
 {
 	tools::vec2 position = { 0,0 };
 	double angle = 0.0f;

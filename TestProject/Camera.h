@@ -2,7 +2,7 @@
 #include "gMath.hpp"
 #include "scene.h"
 #include "component.h"
-class Camera : public component
+class Camera : public component // obsolete
 {
 public:
 	bool enabled = true;
@@ -12,23 +12,6 @@ public:
 	}
 	inline void update(SDL_Renderer* renderer)
 	{
-		if (cWorld != nullptr)
-		{
-			if (cWorld->getEntity(a_eEntityFocus) != nullptr)
-			{
-				if (cWorld->getEntity(a_eEntityFocus)->getComponentEX<transform*>() != nullptr)
-				{
-					this->cameraSize.x = (((cWorld->getEntity(a_eEntityFocus)->getComponentEX<transform*>()->position.x)
-						+ cWorld->getEntity(a_eEntityFocus)->getComponentEX<transform*>()->w) / 2) - screenWidth / 2;
-					this->cameraSize.y = (((cWorld->getEntity(a_eEntityFocus)->getComponentEX<transform*>()->position.y)
-						+ cWorld->getEntity(a_eEntityFocus)->getComponentEX<transform*>()->h) / 2) - screenHeight / 2;
-				}
-				return;
-			}
-		}
-		else {
-			std::cout << "cWorld == nullptr" << std::endl;
-		}
 	}
 
 	~Camera()
@@ -50,3 +33,24 @@ private:
 	SDL_Rect cameraSize = { 0,0, 800,600 };
 };
 
+
+		/*
+			if (cWorld != nullptr)
+			{
+				if (cWorld->getEntity(a_eEntityFocus) != nullptr)
+				{
+					if (cWorld->getEntity(a_eEntityFocus)->getComponentEX<transform*>() != nullptr)
+					{
+						this->cameraSize.x = (((cWorld->getEntity(a_eEntityFocus)->getComponentEX<transform*>()->position.x)
+							+ cWorld->getEntity(a_eEntityFocus)->getComponentEX<transform*>()->w) / 2) - screenWidth / 2;
+						this->cameraSize.y = (((cWorld->getEntity(a_eEntityFocus)->getComponentEX<transform*>()->position.y)
+							+ cWorld->getEntity(a_eEntityFocus)->getComponentEX<transform*>()->h) / 2) - screenHeight / 2;
+					
+					}
+					return;
+				}
+			}
+			else {
+				std::cout << "cWorld == nullptr" << std::endl;
+			}
+		*/

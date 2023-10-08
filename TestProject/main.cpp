@@ -9,10 +9,11 @@
 #include "TestLevel.h"
 #include "namespaces.hpp"
 #include "physicsEngine.h"
-
+#include "imguiMenuUI.h"
 
 int main(int argc, char* args[]) {
 
+	unsigned int dt = 0;
 	int screenWidth = 800;
 	int screenHeight = 600;
 	_sdlWindow window(screenWidth, screenHeight,100,100,"Hello World!", SDL_WINDOW_RESIZABLE );
@@ -21,30 +22,25 @@ int main(int argc, char* args[]) {
 	
 	sceneManager* sManager = new sceneManager;
 	TestLevel level1;
-	/*
-		position2D* pos = new position2D;
-		//sprite* _sprite = new sprite;
-		pos->position.x = 100;
-		world* level1 = new world;
-		world* cWorld;
-		sManager->addWorld(level1, level1ID);
-		sManager->loadWorld(level1ID,cWorld);
-		entity* ent = level1->createEntity();
-		//ent->addComponent(_sprite);
-		ent->addComponent(pos);
-	*/
-	unsigned int dt = 0;
-	image img;
-	img.initImage(renderer);
+
 
 	IMG_Init(IMG_INIT_PNG || IMG_INIT_JPG || IMG_INIT_TIF);
-	ImGui_ImplSDL2_InitForSDLRenderer(window.window, renderer);
-	ImGui_ImplSDLRenderer_Init(renderer);
+	
 	if (!SDL_Init(SDL_INIT_EVERYTHING))
 		std::cout << SDL_GetError() << std::endl;
 	level1.start(renderer,sManager);
 	sManager->startCurrent(renderer);
+
+	//imguiMenuUI::init(renderer,window.window);
 	//tools::frameTime = 0;
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	ImGui::StyleColorsDark();
+
+	ImGui_ImplSDL2_InitForSDLRenderer(window.window, renderer);
+	ImGui_ImplSDLRenderer_Init(renderer);
+
 	while (true)
 	{
 		Uint64 start = SDL_GetPerformanceCounter();
@@ -64,6 +60,7 @@ int main(int argc, char* args[]) {
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		SDL_RenderClear(renderer);
 		
+		
 		level1.update(renderer, sManager,dt);
 
 		// Dont delete
@@ -72,6 +69,7 @@ int main(int argc, char* args[]) {
 		SDL_RenderPresent(renderer);
 		Uint64 end = SDL_GetPerformanceCounter();
 		float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
+		ImGui_ImplSDL2_ProcessEvent(&e);
 		SDL_Delay(floor(16.666f - elapsedMS));
 	}
 	ImGui_ImplSDLRenderer_Shutdown();

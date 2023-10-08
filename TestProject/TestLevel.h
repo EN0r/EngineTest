@@ -11,6 +11,7 @@
 #include "time.h"
 #include "rigidBody2D.h"
 #include "Camera.h"
+#include "camera2D.h"
 class TestLevel
 {
 private:
@@ -19,7 +20,9 @@ private:
 	SDL_Event e;
 	int x, y;
 	const Uint8* keys;
-	Camera* camera = new Camera();
+
+	camera2D* camera = new camera2D();
+	
 	int keycode;
 	int mSpeed = 4;
 public:
@@ -70,8 +73,8 @@ void TestLevel::start(SDL_Renderer* renderer, sceneManager* manager)
 	collider->drawDebugGeometry();
 
 	//camera
-	this->camera->setFocus(this->thisWorld,cube->getEID());
-
+	camera->init(manager);
+	//camera->setEntityFocus(cube->getEID());
 }
 void TestLevel::update(SDL_Renderer* renderer, sceneManager* manager, unsigned int deltaTime)
 {
@@ -82,18 +85,20 @@ void TestLevel::update(SDL_Renderer* renderer, sceneManager* manager, unsigned i
 	manager->getCurrent()->getEntityByTag("Weinus")->getComponentEX<boxCollider2D*>()->updateColliderPosition(manager);
 	manager->getCurrent()->getEntityByTag("Wall")->getComponentEX<boxCollider2D*>()->updateColliderPosition(manager);
 	
-	if (keys[SDL_SCANCODE_W])
-		manager->getCurrent()->getEntityByTag("Weinus")->getComponentEX<rigidBody2D*>()->applyVelocity(0, mSpeed);
-	if (keys[SDL_SCANCODE_A])
-		manager->getCurrent()->getEntityByTag("Weinus")->getComponentEX<rigidBody2D*>()->applyVelocity(-mSpeed, 0);
-	if (keys[SDL_SCANCODE_S])
-		manager->getCurrent()->getEntityByTag("Weinus")->getComponentEX<rigidBody2D*>()->applyVelocity(0,-mSpeed);
-	if (keys[SDL_SCANCODE_D])
-		manager->getCurrent()->getEntityByTag("Weinus")->getComponentEX<rigidBody2D*>()->applyVelocity(mSpeed, 0);
+	//manager->getCurrent()->getEntityByTag("Weinus")->getComponentEX<camera2D*>()->setCameraPosition({ 0 ,manager->getCurrent()->getEntityByTag("Weinus")->getComponentEX<camera2D*>()->getCameraPosition().y + 1 });
 
+	if (keys[SDL_SCANCODE_W])
+		thisWorld->getEntityByTag("Weinus")->getComponentEX<rigidBody2D*>()->applyVelocity(2, 0);
+	if (keys[SDL_SCANCODE_A])
+	{
+		manager->getCurrent()->getEntityByTag("Weinus")->getComponentEX<camera2D*>()->setCameraPosition({ manager->getCurrent()->getEntityByTag("Weinus")->getComponentEX<camera2D*>()->getCameraPosition().x + 1 ,0 });
+	}
+	if (keys[SDL_SCANCODE_D])
+	{
+		manager->getCurrent()->getEntityByTag("Weinus")->getComponentEX<camera2D*>()->setCameraPosition({ manager->getCurrent()->getEntityByTag("Weinus")->getComponentEX<camera2D*>()->getCameraPosition().x - 1 ,0 });
+	}
 	t_timer.start_recursiveTimerMS(1000,deltaTime);
 	if (t_timer.c_recursiveTimerDelay())
 	{
 	}
-
 }

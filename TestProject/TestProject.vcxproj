@@ -133,6 +133,7 @@
     <ClCompile Include="animation2D.cpp" />
     <ClCompile Include="boxCollider2D.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="camera2D.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imguiMenuUI.cpp" />
@@ -146,11 +147,13 @@
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="physicsEngine.cpp" />
+    <ClCompile Include="renderedPosition.cpp" />
     <ClCompile Include="rigidBody2D.cpp" />
     <ClCompile Include="scene.cpp" />
     <ClCompile Include="sprite.cpp" />
     <ClCompile Include="time.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="UIFrame.cpp" />
     <ClCompile Include="windowClass.cpp" />
     <ClCompile Include="world.cpp" />
   </ItemGroup>
@@ -158,12 +161,14 @@
     <ClInclude Include="animation2D.h" />
     <ClInclude Include="boxCollider.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="camera2D.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imguiMenuUI.h" />
     <ClInclude Include="namespaces.hpp" />
     <ClInclude Include="physicsEngine.h" />
     <ClInclude Include="position2D.h" />
+    <ClInclude Include="renderedPosition.h" />
     <ClInclude Include="rigidBody2D.h" />
     <ClInclude Include="scene.h" />
     <ClInclude Include="SDL2-2.28.3\include\begin_code.h" />
@@ -250,6 +255,7 @@
     <ClInclude Include="TestLevel.h" />
     <ClInclude Include="time.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="UIFrame.h" />
     <ClInclude Include="world.h" />
     <ClInclude Include="gMath.hpp" />
     <ClInclude Include="component.h" />

@@ -6,6 +6,7 @@
 #include <string>
 
 
+
 class component
 {
 public:
@@ -26,7 +27,6 @@ public:
 	inline int getEID() { return this->ID; }
 	inline int setEID(int Id) { this->ID = Id; return ID; }
 	std::map<int, component*> getComponentList() { return this->componentList; }
-	
 	entity()
 	{
 		componentList.clear();
@@ -57,7 +57,7 @@ public:
 				break;
 			}
 		}
-		std::cout << "WARNING //" << " component does not exist: " << typeid(T).name() << std::endl;
+		//std::cout << "WARNING //" << " component does not exist: " << typeid(T).name() << std::endl;
 		return nullptr;
 	}
 

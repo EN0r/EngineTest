@@ -58,6 +58,12 @@
     <Filter Include="Core\UI\debugIMGUI">
       <UniqueIdentifier>{8f9bda34-4c76-465d-baf4-0da9463ff3e7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\Camera\obsolete">
+      <UniqueIdentifier>{4c70ea46-5b04-409e-85f7-702bf4125cc7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\UI\UIComponents">
+      <UniqueIdentifier>{0c7b0ca5-e6f1-4537-80f6-d3e4abfa5459}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui_stdlib.cpp">
@@ -120,11 +126,20 @@
     <ClCompile Include="entity.cpp">
       <Filter>Headers\entitys</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
+    <ClCompile Include="scene.cpp" />
+    <ClCompile Include="imguiMenuUI.cpp">
+      <Filter>Core\UI\debugIMGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="camera2D.cpp">
       <Filter>Core\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="scene.cpp" />
-    <ClCompile Include="imguiMenuUI.cpp" />
+    <ClCompile Include="renderedPosition.cpp">
+      <Filter>Headers\entitys\components</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Core\Camera\obsolete</Filter>
+    </ClCompile>
+    <ClCompile Include="UIFrame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gMath.hpp">
@@ -418,10 +433,19 @@
     <ClInclude Include="UI.h">
       <Filter>Core\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
+    <ClInclude Include="imguiMenuUI.h">
+      <Filter>Core\UI\debugIMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="camera2D.h">
       <Filter>Core\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="imguiMenuUI.h" />
+    <ClInclude Include="renderedPosition.h">
+      <Filter>Headers\entitys\components</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Core\Camera\obsolete</Filter>
+    </ClInclude>
+    <ClInclude Include="UIFrame.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\cursor.png">

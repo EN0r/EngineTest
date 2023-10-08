@@ -5,7 +5,7 @@ class sceneManager
 {
 private:
 	std::map<int, world*> sceneList;
-	world* currentWorld;
+	world* currentWorld = nullptr;
 public:
 
 	~sceneManager() {
@@ -15,7 +15,6 @@ public:
 		delete currentWorld;
 		delete this;
 	}
-
 	inline bool addWorld(world* scene, int& id)
 	{
 		for (auto scenes : sceneList)
