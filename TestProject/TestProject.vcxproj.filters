@@ -37,6 +37,27 @@
     <Filter Include="Resources\placeholder">
       <UniqueIdentifier>{17714296-377e-4665-905f-f9b262f19050}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{942202ec-dde8-48f8-b7c1-0c4a9ecd72a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Time">
+      <UniqueIdentifier>{9d773f7d-4e13-485d-a63d-b5e9961fce44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\UI">
+      <UniqueIdentifier>{3a70bc9b-6f78-45af-8df5-20551c8e86d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\physEngine">
+      <UniqueIdentifier>{ff18bbf8-c2ad-4dda-86cc-bac5c4ffb3c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\entitys\animationHandling">
+      <UniqueIdentifier>{b06dca88-598c-4332-98fa-fa2b2195f295}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Camera">
+      <UniqueIdentifier>{16b5cc95-ccf8-4004-9862-0b32799dcc27}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\UI\debugIMGUI">
+      <UniqueIdentifier>{8f9bda34-4c76-465d-baf4-0da9463ff3e7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui_stdlib.cpp">
@@ -72,18 +93,38 @@
     <ClCompile Include="world.cpp">
       <Filter>class Definitions</Filter>
     </ClCompile>
-    <ClCompile Include="entity.cpp">
-      <Filter>class Definitions</Filter>
-    </ClCompile>
     <ClCompile Include="image.cpp">
       <Filter>image</Filter>
-    </ClCompile>
-    <ClCompile Include="physics2D.cpp">
-      <Filter>Headers\entitys\components</Filter>
     </ClCompile>
     <ClCompile Include="sprite.cpp">
       <Filter>Headers\entitys\components</Filter>
     </ClCompile>
+    <ClCompile Include="boxCollider2D.cpp">
+      <Filter>Headers\entitys\components</Filter>
+    </ClCompile>
+    <ClCompile Include="rigidBody2D.cpp">
+      <Filter>Headers\entitys\components</Filter>
+    </ClCompile>
+    <ClCompile Include="time.cpp">
+      <Filter>Core\Time</Filter>
+    </ClCompile>
+    <ClCompile Include="animation2D.cpp">
+      <Filter>Headers\entitys\animationHandling</Filter>
+    </ClCompile>
+    <ClCompile Include="physicsEngine.cpp">
+      <Filter>Core\physEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Core\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cpp">
+      <Filter>Headers\entitys</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Core\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp" />
+    <ClCompile Include="imguiMenuUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gMath.hpp">
@@ -106,9 +147,6 @@
     </ClInclude>
     <ClInclude Include="image.h">
       <Filter>image</Filter>
-    </ClInclude>
-    <ClInclude Include="physics2D.h">
-      <Filter>Headers\entitys\components</Filter>
     </ClInclude>
     <ClInclude Include="position2D.h">
       <Filter>Headers\entitys\components</Filter>
@@ -359,6 +397,31 @@
     <ClInclude Include="SDL2-2.28.3\include\SDL_vulkan.h">
       <Filter>vendor\SDL</Filter>
     </ClInclude>
+    <ClInclude Include="rigidBody2D.h">
+      <Filter>Headers\entitys\components</Filter>
+    </ClInclude>
+    <ClInclude Include="boxCollider.h">
+      <Filter>Headers\entitys\components</Filter>
+    </ClInclude>
+    <ClInclude Include="time.h">
+      <Filter>Core\Time</Filter>
+    </ClInclude>
+    <ClInclude Include="namespaces.hpp">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="animation2D.h">
+      <Filter>Headers\entitys\animationHandling</Filter>
+    </ClInclude>
+    <ClInclude Include="physicsEngine.h">
+      <Filter>Core\physEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Core\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Core\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="imguiMenuUI.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\cursor.png">

@@ -40,5 +40,6 @@ public:
 			}
 			return R;
 		}
+		return nullptr;
 	}
 };

@@ -46,7 +46,7 @@ public:
 	template<typename T>
 	T getComponentEX() // get component via class
 	{
-		for (auto component: componentList)
+		for (auto component: this->componentList)
 		{
 			
 			std::string n1 = typeid(T).name();
@@ -57,7 +57,7 @@ public:
 				break;
 			}
 		}
-		std::cout << "Error comp does not exist" << std::endl;
+		std::cout << "WARNING //" << " component does not exist: " << typeid(T).name() << std::endl;
 		return nullptr;
 	}
 
@@ -78,6 +78,7 @@ public:
 		T component = new T;
 		componentList.emplace((componentList.size()+1), component);
 	}
+
 	inline int addComponent(component* pointerToBeAdded)
 	{
 		if(componentList.size()>0)
@@ -87,6 +88,7 @@ public:
 				if (vars.first == pointerToBeAdded->ID)
 				{
 					std::cout << "Component already exists inside entity" << std::endl;
+					delete pointerToBeAdded;
 					return -1;
 				}
 			}

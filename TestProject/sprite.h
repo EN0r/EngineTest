@@ -1,6 +1,7 @@
 #pragma once
 #include "component.h"
 #include "position2D.h"
+#include "Camera.h"
 class sprite : public component
 {
 private:
@@ -25,8 +26,13 @@ public:
 	{
 		if (inited == true)
 		{
-			img.createImage(renderer, rect, transform2D->angle);
-			this->rect = { (int)transform2D->position.x,(int)transform2D->position.y,transform2D->w,transform2D->h };
+			if (entityAssigned->getComponentEX<Camera*>() != nullptr)
+			{
+				this->rect = { (int)transform2D->position.x - entityAssigned->getComponentEX<Camera*>()->getCameraSize().x
+					,(int)transform2D->position.y- entityAssigned->getComponentEX<Camera*>()->getCameraSize().y
+					,transform2D->w,transform2D->h };
+				img.createImage(renderer, rect, transform2D->angle);
+			}
 		}
 	}
 

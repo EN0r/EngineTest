@@ -4,13 +4,7 @@
 #include "image.h"
 #include "entity.h"
 
-struct velocity : component
-{
-	void update(SDL_Renderer* renderer);
-	void start(SDL_Renderer* renderer);
-	float x, y;
-};
-struct transform : component
+struct transform : public component
 {
 	tools::vec2 position = { 0,0 };
 	double angle = 0.0f;

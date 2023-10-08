@@ -3,10 +3,9 @@
 #include "SDL.h"
 class world // Needs to iterate through entities 
 {
-private: // contains all entities;
-	std::map<int, entity*> entities; // entityList
-	int ID = -1;
 public:
+	const int LevelWidth = 1920;
+	const int LevelHeight = 1080;
 	~world()
 	{
 		for (auto v : entities)
@@ -16,6 +15,12 @@ public:
 		entities.clear();
 		delete this;
 	}
+
+	inline std::map<int, entity*> getEntityList()
+	{
+		return this->entities;
+	}
+
 	inline std::map<int, component*> getComponentList(int ID) // takes ID of entity
 	{
 		for (auto entity : entities)
@@ -47,6 +52,7 @@ public:
 			if (entity.first == id)
 				return entity.second;
 		}
+		return nullptr;
 	}
 	inline entity* getEntityByTag(const char* name)
 	{
@@ -55,6 +61,7 @@ public:
 			if (entity.second->tag == name)
 				return entity.second;
 		}
+		return nullptr;
 	}
 
 	inline void start(SDL_Renderer* renderer)
@@ -72,6 +79,10 @@ public:
 			entity.second->update(renderer);
 		}
 	}
+
+private: // contains all entities;
+	std::map<int, entity*> entities; // entityList
+	int ID = -1;
 
 
 };

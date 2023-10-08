@@ -1,7 +1,4 @@
 #include <iostream>
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_sdl.h"
-#include "imgui/imgui_impl_sdlrenderer.h"
 #include "windowClass.h"
 #include "world.h"
 #include "component.h"
@@ -10,6 +7,8 @@
 #include "position2D.h"
 #include "sprite.h"
 #include "TestLevel.h"
+#include "namespaces.hpp"
+#include "physicsEngine.h"
 
 
 int main(int argc, char* args[]) {
@@ -34,12 +33,13 @@ int main(int argc, char* args[]) {
 		//ent->addComponent(_sprite);
 		ent->addComponent(pos);
 	*/
-
+	unsigned int dt = 0;
 	image img;
 	img.initImage(renderer);
 
 	IMG_Init(IMG_INIT_PNG || IMG_INIT_JPG || IMG_INIT_TIF);
-
+	ImGui_ImplSDL2_InitForSDLRenderer(window.window, renderer);
+	ImGui_ImplSDLRenderer_Init(renderer);
 	if (!SDL_Init(SDL_INIT_EVERYTHING))
 		std::cout << SDL_GetError() << std::endl;
 	level1.start(renderer,sManager);
@@ -48,6 +48,8 @@ int main(int argc, char* args[]) {
 	while (true)
 	{
 		Uint64 start = SDL_GetPerformanceCounter();
+		physicsVariables::deltaTime++;
+		dt++;
 		switch (SDL_PollEvent(&e))
 		{
 		case SDL_QUIT:
@@ -58,10 +60,11 @@ int main(int argc, char* args[]) {
 			SDL_MaximizeWindow(window.window);
 			SDL_GetWindowSize(window.window, &screenWidth, &screenHeight);
 		}
+		SDL_GetKeyboardState(&keyBoard::keyDown);
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		SDL_RenderClear(renderer);
 		
-		level1.update(renderer, sManager);
+		level1.update(renderer, sManager,dt);
 
 		// Dont delete
 		// sManager updates all components
@@ -71,6 +74,9 @@ int main(int argc, char* args[]) {
 		float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
 		SDL_Delay(floor(16.666f - elapsedMS));
 	}
-
+	ImGui_ImplSDLRenderer_Shutdown();
+	ImGui_ImplSDL2_Shutdown();
+	ImGui::DestroyContext();
+	SDL_Quit();
 	return -1;
 }

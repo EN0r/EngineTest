@@ -1,5 +1,6 @@
 #pragma once
 #include "world.h"
+
 class sceneManager
 {
 private:
@@ -30,7 +31,9 @@ public:
 			
 			id = scene->setID((sceneList.size() + 1));
 			this->sceneList.emplace(scene->getID(), scene);
+			return true;
 		}
+		return false;
 	}
 
 	inline bool loadWorld(int ID)
@@ -50,6 +53,8 @@ public:
 		}
 		return false;
 	}
+
+	component* getCurrentCamera();
 
 	inline void updateCurrent(SDL_Renderer* renderer)
 	{
