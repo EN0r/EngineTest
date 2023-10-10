@@ -64,6 +64,9 @@
     <Filter Include="Core\UI\UIComponents">
       <UniqueIdentifier>{0c7b0ca5-e6f1-4537-80f6-d3e4abfa5459}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\UI\UIComponents\UIObjects">
+      <UniqueIdentifier>{c8f03963-6ef7-453e-ba60-90e88aaee518}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui_stdlib.cpp">
@@ -139,7 +142,14 @@
     <ClCompile Include="Camera.cpp">
       <Filter>Core\Camera\obsolete</Filter>
     </ClCompile>
-    <ClCompile Include="UIFrame.cpp" />
+    <ClCompile Include="UIFrame.cpp">
+      <Filter>Core\UI\UIComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp" />
+    <ClCompile Include="TextLevel.cpp">
+      <Filter>Levels</Filter>
+    </ClCompile>
+    <ClCompile Include="DefaultLevel.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gMath.hpp">
@@ -445,7 +455,11 @@
     <ClInclude Include="Camera.h">
       <Filter>Core\Camera\obsolete</Filter>
     </ClInclude>
-    <ClInclude Include="UIFrame.h" />
+    <ClInclude Include="UIFrame.h">
+      <Filter>Core\UI\UIComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h" />
+    <ClInclude Include="DefaultLevel.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\cursor.png">

@@ -11,6 +11,12 @@ class UI
 public:
 	virtual void start(SDL_Renderer* renderer) = 0;
 	virtual void update(SDL_Renderer* renderer) = 0;
+
+	void render(SDL_Renderer* renderer);
+	void init(SDL_Renderer* renderer);
+
+
+
 	template<typename T>
 	T getUIElement() // get component via class
 	{
@@ -25,9 +31,12 @@ public:
 				break;
 			}
 		}
+
 		//std::cout << "WARNING //" << " component does not exist: " << typeid(T).name() << std::endl;
 		return nullptr;
 	}
+
+
 private:
 	std::vector<UI> uiComponents;
 

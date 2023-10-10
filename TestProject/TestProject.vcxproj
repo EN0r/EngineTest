@@ -134,6 +134,7 @@
     <ClCompile Include="boxCollider2D.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="camera2D.cpp" />
+    <ClCompile Include="DefaultLevel.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imguiMenuUI.cpp" />
@@ -150,9 +151,11 @@
     <ClCompile Include="renderedPosition.cpp" />
     <ClCompile Include="rigidBody2D.cpp" />
     <ClCompile Include="scene.cpp" />
+    <ClCompile Include="TextLevel.cpp" />
     <ClCompile Include="sprite.cpp" />
     <ClCompile Include="time.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="UIFrame.cpp" />
     <ClCompile Include="windowClass.cpp" />
     <ClCompile Include="world.cpp" />
@@ -162,6 +165,7 @@
     <ClInclude Include="boxCollider.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="camera2D.h" />
+    <ClInclude Include="DefaultLevel.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imguiMenuUI.h" />
@@ -255,6 +259,7 @@
     <ClInclude Include="TestLevel.h" />
     <ClInclude Include="time.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="UIButton.h" />
     <ClInclude Include="UIFrame.h" />
     <ClInclude Include="world.h" />
     <ClInclude Include="gMath.hpp" />
