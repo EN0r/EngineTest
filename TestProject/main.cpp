@@ -1,4 +1,5 @@
 #include <iostream>
+#include "SDL_ttf.h"
 #include "windowClass.h"
 #include "world.h"
 #include "component.h"
@@ -10,6 +11,7 @@
 #include "namespaces.hpp"
 #include "physicsEngine.h"
 #include "imguiMenuUI.h"
+#include "fBirdClone.h"
 
 int main(int argc, char* args[]) {
 
@@ -22,15 +24,15 @@ int main(int argc, char* args[]) {
 	
 	sceneManager* sManager = new sceneManager;
 	TestLevel level1;
+	
 
 
 	IMG_Init(IMG_INIT_PNG || IMG_INIT_JPG || IMG_INIT_TIF);
 	
 	if (!SDL_Init(SDL_INIT_EVERYTHING))
 		std::cout << SDL_GetError() << std::endl;
-	level1.start(renderer,sManager);
-	sManager->startCurrent(renderer);
-
+	if (!TTF_Init())
+		std::cout << SDL_GetError() << std::endl;
 	//imguiMenuUI::init(renderer,window.window);
 	//tools::frameTime = 0;
 	IMGUI_CHECKVERSION();
@@ -40,6 +42,10 @@ int main(int argc, char* args[]) {
 
 	ImGui_ImplSDL2_InitForSDLRenderer(window.window, renderer);
 	ImGui_ImplSDLRenderer_Init(renderer);
+
+	fBirdClone level;
+	level.start(renderer,sManager);
+	sManager->startCurrent(renderer);
 
 	while (true)
 	{
@@ -61,8 +67,7 @@ int main(int argc, char* args[]) {
 		SDL_RenderClear(renderer);
 		
 		
-		level1.update(renderer, sManager,dt);
-
+		level.update(renderer, sManager,dt);
 		// Dont delete
 		// sManager updates all components
 		sManager->updateCurrent(renderer);
@@ -70,11 +75,12 @@ int main(int argc, char* args[]) {
 		Uint64 end = SDL_GetPerformanceCounter();
 		float elapsedMS = (end - start) / (float)SDL_GetPerformanceFrequency() * 1000.0f;
 		ImGui_ImplSDL2_ProcessEvent(&e);
-		SDL_Delay(floor(16.666f - elapsedMS));
+		//SDL_Delay(floor(16.666f - elapsedMS));
 	}
 	ImGui_ImplSDLRenderer_Shutdown();
 	ImGui_ImplSDL2_Shutdown();
 	ImGui::DestroyContext();
+	TTF_Quit();
 	SDL_Quit();
 	return -1;
 }

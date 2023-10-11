@@ -67,6 +67,18 @@
     <Filter Include="Core\UI\UIComponents\UIObjects">
       <UniqueIdentifier>{c8f03963-6ef7-453e-ba60-90e88aaee518}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Levels\game">
+      <UniqueIdentifier>{4014b021-9cdd-4667-b7b0-b9d34bd3ad7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Text">
+      <UniqueIdentifier>{014ad8d3-4226-4969-a20f-1f1750060556}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\audio">
+      <UniqueIdentifier>{f1223ea1-1d80-44a7-8e2f-9a4c069b6e6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Random">
+      <UniqueIdentifier>{60c8445e-4b17-4fea-a614-ec19693886a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui_stdlib.cpp">
@@ -129,7 +141,6 @@
     <ClCompile Include="entity.cpp">
       <Filter>Headers\entitys</Filter>
     </ClCompile>
-    <ClCompile Include="scene.cpp" />
     <ClCompile Include="imguiMenuUI.cpp">
       <Filter>Core\UI\debugIMGUI</Filter>
     </ClCompile>
@@ -145,11 +156,25 @@
     <ClCompile Include="UIFrame.cpp">
       <Filter>Core\UI\UIComponents</Filter>
     </ClCompile>
-    <ClCompile Include="UIButton.cpp" />
     <ClCompile Include="TextLevel.cpp">
       <Filter>Levels</Filter>
     </ClCompile>
-    <ClCompile Include="DefaultLevel.cpp" />
+    <ClCompile Include="text.cpp">
+      <Filter>Core\Text</Filter>
+    </ClCompile>
+    <ClCompile Include="UIButton.cpp">
+      <Filter>Core\UI\UIComponents\UIObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp">
+      <Filter>Headers</Filter>
+    </ClCompile>
+    <ClCompile Include="fBirdClone.cpp">
+      <Filter>Levels\game</Filter>
+    </ClCompile>
+    <ClCompile Include="audio.cpp">
+      <Filter>Core\audio</Filter>
+    </ClCompile>
+    <ClCompile Include="numFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gMath.hpp">
@@ -458,8 +483,19 @@
     <ClInclude Include="UIFrame.h">
       <Filter>Core\UI\UIComponents</Filter>
     </ClInclude>
-    <ClInclude Include="UIButton.h" />
-    <ClInclude Include="DefaultLevel.h" />
+    <ClInclude Include="text.h">
+      <Filter>Core\Text</Filter>
+    </ClInclude>
+    <ClInclude Include="UIButton.h">
+      <Filter>Core\UI\UIComponents\UIObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="fBirdClone.h">
+      <Filter>Levels\game</Filter>
+    </ClInclude>
+    <ClInclude Include="audio.h">
+      <Filter>Core\audio</Filter>
+    </ClInclude>
+    <ClInclude Include="numFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\cursor.png">

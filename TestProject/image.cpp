@@ -41,7 +41,7 @@ bool image::createImage(SDL_Renderer* renderer, SDL_Rect rect, double ang, bool 
 	{
 		if (SDL_RenderCopyEx(renderer, textureBuf, NULL, &this->imageSize, ang, NULL, SDL_FLIP_HORIZONTAL) != 0)
 		{
-			std::cout << "ERROR RENDERCOPY" << std::endl;
+			std::cout << SDL_GetError() << std::endl;
 			return false;
 		}
 		else { return true; }
@@ -51,6 +51,7 @@ bool image::createImage(SDL_Renderer* renderer, SDL_Rect rect, double ang, bool 
 		if (SDL_RenderCopyEx(renderer, textureBuf, NULL, &this->imageSize, ang, NULL, SDL_FLIP_NONE) != 0)
 		{
 			std::cout << "ERROR RENDERCOPY" << std::endl;
+			std::cout << SDL_GetError() << std::endl;
 			return false;
 		}
 		else { return true; }

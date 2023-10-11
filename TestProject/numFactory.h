@@ -1,11 +1,10 @@
 #pragma once
-class DefaultLevel
+class numFactory
 {
 public:
 
 
 private:
-
 
 };
 

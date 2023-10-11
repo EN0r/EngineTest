@@ -104,13 +104,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\eriah\source\repos\TestProject\TestProject\SDL2_ttf-2.20.2\include;C:\Users\eriah\source\repos\TestProject\TestProject\SDL2_image-2.6.3\include;C:\Users\eriah\source\repos\TestProject\TestProject\SDL2-2.28.3\include;C:\Users\eriah\source\repos\TestProject\TestProject\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\eriah\source\repos\TestProject\TestProject\SDL2_mixer-2.6.3\include;C:\Users\eriah\source\repos\TestProject\TestProject\SDL2_ttf-2.20.2\include;C:\Users\eriah\source\repos\TestProject\TestProject\SDL2_image-2.6.3\include;C:\Users\eriah\source\repos\TestProject\TestProject\SDL2-2.28.3\include;C:\Users\eriah\source\repos\TestProject\TestProject\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2main.lib;SDL2.lib;SDL2_ttf.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\Users\eriah\source\repos\TestProject\TestProject\SDL2_ttf-2.20.2\lib\x64;C:\Users\eriah\source\repos\TestProject\TestProject\SDL2_image-2.6.3\lib\x64;C:\Users\eriah\source\repos\TestProject\TestProject\SDL2-2.28.3\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2main.lib;SDL2.lib;SDL2_ttf.lib;SDL2_image.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Users\eriah\source\repos\TestProject\TestProject\SDL2_mixer-2.6.3\lib\x64;C:\Users\eriah\source\repos\TestProject\TestProject\SDL2_ttf-2.20.2\lib\x64;C:\Users\eriah\source\repos\TestProject\TestProject\SDL2_image-2.6.3\lib\x64;C:\Users\eriah\source\repos\TestProject\TestProject\SDL2-2.28.3\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,11 +131,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="animation2D.cpp" />
+    <ClCompile Include="audio.cpp" />
     <ClCompile Include="boxCollider2D.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="camera2D.cpp" />
-    <ClCompile Include="DefaultLevel.cpp" />
     <ClCompile Include="entity.cpp" />
+    <ClCompile Include="fBirdClone.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="imguiMenuUI.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
@@ -147,10 +148,12 @@
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="numFactory.cpp" />
     <ClCompile Include="physicsEngine.cpp" />
     <ClCompile Include="renderedPosition.cpp" />
     <ClCompile Include="rigidBody2D.cpp" />
     <ClCompile Include="scene.cpp" />
+    <ClCompile Include="text.cpp" />
     <ClCompile Include="TextLevel.cpp" />
     <ClCompile Include="sprite.cpp" />
     <ClCompile Include="time.cpp" />
@@ -162,14 +165,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation2D.h" />
+    <ClInclude Include="audio.h" />
     <ClInclude Include="boxCollider.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="camera2D.h" />
-    <ClInclude Include="DefaultLevel.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="fBirdClone.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="imguiMenuUI.h" />
     <ClInclude Include="namespaces.hpp" />
+    <ClInclude Include="numFactory.h" />
     <ClInclude Include="physicsEngine.h" />
     <ClInclude Include="position2D.h" />
     <ClInclude Include="renderedPosition.h" />
@@ -257,6 +262,7 @@
     <ClInclude Include="SDL2_ttf-2.20.2\include\SDL_ttf.h" />
     <ClInclude Include="sprite.h" />
     <ClInclude Include="TestLevel.h" />
+    <ClInclude Include="text.h" />
     <ClInclude Include="time.h" />
     <ClInclude Include="UI.h" />
     <ClInclude Include="UIButton.h" />

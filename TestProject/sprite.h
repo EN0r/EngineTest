@@ -10,16 +10,15 @@ private:
 	image img;
 	entity* entityAssigned;
 	transform* transform2D;
-	const char* filePath;
 	bool visible = true;
 	bool inited = false;
 public:
-	sprite()
-	{
-
-	}
+	bool flip = false;
+	const char* filePath = "./resources/placeholder/error.png";
+	inline void setVisiblity(bool visibility) { visible = visibility; }
 	inline void start(SDL_Renderer* renderer)
 	{
+		img.setPath(filePath);
 		img.initImage(renderer);
 		inited = true;
 	}
@@ -34,8 +33,8 @@ public:
 				this->rect = { (int)entityAssigned->getComponentEX<renderedPosition*>()->position.x - diffx
 							  ,(int)entityAssigned->getComponentEX<renderedPosition*>()->position.y - diffy
 						      ,transform2D->w,transform2D->h };
-				std::cout << (int)entityAssigned->getComponentEX<renderedPosition*>()->position.x << std::endl;
-				img.createImage(renderer, rect, transform2D->angle);
+				if (visible)
+					img.createImage(renderer, rect, transform2D->angle,flip);
 			}
 			else {
 				std::cout << " no rendered position!!" << std::endl;
@@ -43,7 +42,7 @@ public:
 		}
 	}
 
-	inline void init(entity* e, const char* path = "NULL")
+	inline void init(entity* e, const char* path = "./resources/placeholder/error.png")
 	{
 		if (e->getComponentEX<transform*>() != nullptr) // why do i check twice?
 		{
@@ -55,11 +54,8 @@ public:
 				{
 					this->rect = { (int)entityAssigned->getComponentEX<renderedPosition*>()->position.x,(int)entityAssigned->getComponentEX<renderedPosition*>()->position.y,transform2D->w,transform2D->h };
 				}
-				if (path != "NULL")
-				{
-					img.setPath(path);
-				}
-
+				std::cout << path << std::endl;
+				img.setPath(path);
 			}
 		}
 		else {

@@ -1,5 +1,6 @@
 #include "time.h"
 #include <cmath>
+#include <iostream>
 void timer::start_delayMS(unsigned int ms, unsigned int deltaTime)
 {
     if (this->timeStarted <= 0)
@@ -42,5 +43,6 @@ bool timer::c_recursiveTimerDelay()
         timeDest = timeStarted + timeDest;
         return true;
     }
+    std::cout << timeStarted << std::endl;
     return false;
 }
