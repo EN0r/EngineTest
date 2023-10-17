@@ -1,4 +1,5 @@
 #include "fBirdClone.h"
+#include "numFactory.h"
 enum gameStates // should probably port this to main.cpp and store the state as a global in a namespace or world object.
 {
 	PLAY = 0,
@@ -23,8 +24,14 @@ unsigned int plrJumpStart = 0;
 unsigned int playerJumpPower = 1;
 unsigned int plrDestTime = 5;
 
+
+// pick up items spawn
 unsigned int pickupStart = 0;
-unsigned int pickupSpawn = 0;
+unsigned int pickupSpawn = 3000;
+
+// pick up items physics handler
+unsigned int pickUpStartPhys = 0;
+unsigned int pickUpStartPhysGoal = 5;
 
 
 /*
@@ -62,6 +69,7 @@ void fBirdClone::start(SDL_Renderer* renderer, sceneManager* manager)
 	player->getComponentEX<sprite*>()->init(player, files[1].c_str());
 	player->getComponentEX<sprite*>()->filePath = files[1].c_str();
 	player->getComponentEX<boxCollider2D*>()->initColliderPosition(manager, player->getEID());
+	player->getComponentEX<boxCollider2D*>()->drawDebugGeometry();
 
 }
 
@@ -128,25 +136,52 @@ void fBirdClone::update(SDL_Renderer* renderer, sceneManager* manager, unsigned 
 			if (pickupStart == pickupSpawn)
 			{
 				pickupStart = 0;
-				entity*& pEnt = thisWorld->createEntity();
-				transform* newTransform;
-				spawnedID.push_back(pEnt->getEID());
+				entity* pEnt = thisWorld->createEntity();
+				transform* newTransform = new transform;
+				renderedPosition* rPos = new renderedPosition;
+				sprite* pEntSprite = new sprite;
+				boxCollider2D* boxCollider = new boxCollider2D;
+				
+				pEntSprite->filePath = files[3].c_str();
 				pEnt->addComponent(newTransform);
+				pEnt->addComponent(rPos);
+				pEnt->addComponent(boxCollider);
+ 				pEnt->addComponent(pEntSprite);
+				pEnt->getComponentEX<boxCollider2D*>()->initColliderPosition(manager,pEnt->getEID());
+				pEnt->tag = "PickUpObject";
 
-				pEnt->getComponentEX<transform*>()->position.y -= 1;
+				newTransform->w = 64;
+				newTransform->h = 64;
+				rPos->position.x = numFactory::randNumDT(800, deltaTime);
+				rPos->position.y = numFactory::randNumDT(20, deltaTime*10);
+				newTransform->position.x = numFactory::randNumDT(800, deltaTime);
+				newTransform->position.y = numFactory::randNumDT(20, deltaTime*10);
+				pEntSprite->start(renderer);
+
+ 				pEntSprite->init(pEnt,files[3].c_str());
+				spawnedID.push_back(pEnt->getEID());
+
+				//std::cout << "spawned!! :" << newTransform->position.x << "," << newTransform->position.x << std::endl;
+
+
 				for (auto entityID : spawnedID)
 				{
 					// if offscreen X
-					if (thisWorld->getEntity(entityID)->getComponentEX<transform*>()->position.x >= 800 || thisWorld->getEntity(entityID)->getComponentEX<transform*>()->position.x >= -1)
+					if (thisWorld->getEntity(entityID)->getComponentEX<transform*>()->position.x <= 800 || thisWorld->getEntity(entityID)->getComponentEX<transform*>()->position.x <= -1)
 					{
 						// need to also remove it from entity list;
-
-						delete thisWorld->getEntity(entityID);
+						//delete thisWorld->getEntity(entityID);
+						//delete newTransform;
+						//delete pEntSprite;
 					}
 					// if off screen Y
-					if (thisWorld->getEntity(entityID)->getComponentEX<transform*>()->position.y >= 600 || thisWorld->getEntity(entityID)->getComponentEX<transform*>()->position.y >= -1)
+					if (thisWorld->getEntity(entityID)->getComponentEX<transform*>()->position.y > 600)
 					{
-						delete thisWorld->getEntity(entityID);
+						thisWorld->getEntity(entityID)->getComponentEX<sprite*>()->setVisiblity(false);
+						std::cout << entityID << " , Has been made invisible." << std::endl;
+						//delete thisWorld->getEntity(entityID);
+						//delete newTransform;
+						//delete pEntSprite;
 					}
 				}
 
@@ -154,9 +189,56 @@ void fBirdClone::update(SDL_Renderer* renderer, sceneManager* manager, unsigned 
 
 		}
 
+		// update spawned pickup objects.
+		pickUpStartPhys++;
+		{
+			if (pickUpStartPhys == pickUpStartPhysGoal)
+			{
+				pickUpStartPhys = 0;
+				for (auto object : thisWorld->getEntityList())
+				{
+					if (object.second->tag == "PickUpObject")
+					{
+						object.second->getComponentEX<transform*>()->position.y -= 1;
+						object.second->getComponentEX<boxCollider2D*>()->updateColliderPosition(manager);
+						object.second->getComponentEX<transform*>()->angle += 1;
+						if (object.second->getComponentEX<transform*>()->angle == 360)
+							object.second->getComponentEX<transform*>()->angle = 0;
+					
+					}
+				}
+			}
+		}
+
+		// check if picked up
+
+		{
+			for (auto pickUpObj : thisWorld->getEntityList())
+			{
+				pickUpObj.second->getComponentEX<boxCollider2D*>()->drawDebugGeometry();
+				if (pickUpObj.second->tag == "PickUpObject") {
+					pickUpObj.second->getComponentEX<boxCollider2D*>()->updateColliderPosition(manager);
+					if (pickUpObj.second->getComponentEX<boxCollider2D*>()->isCollidingEX(thisWorld))
+					{
+						pickUpObj.second->getComponentEX<sprite*>()->setVisiblity(false);
+						std::cout << "Picked up! " << std::endl;
+					}
+				}
+				else {
+					
+					if (pickUpObj.second->getComponentEX<boxCollider2D*>()->isCollidingEX(thisWorld))
+					{
+						pickUpObj.second->getComponentEX<sprite*>()->setVisiblity(false);
+					}
+
+				}
+			}
+		}
+
 		// movement -- need to make it so player cant go higher than y of screen,
 		{
 			plrJumpStart++;
+			player->getComponentEX<boxCollider2D*>()->updateColliderPosition(manager);
 			if (keys[SDL_SCANCODE_SPACE])
 			{
 				if (plrJumpStart >= plrDestTime)
@@ -177,6 +259,7 @@ void fBirdClone::update(SDL_Renderer* renderer, sceneManager* manager, unsigned 
 				player->getComponentEX<sprite*>()->flip = true;
 			}
 		}
+
 
 		// renderUI
 		{

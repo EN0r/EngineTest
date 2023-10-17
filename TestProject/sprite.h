@@ -12,15 +12,20 @@ private:
 	transform* transform2D;
 	bool visible = true;
 	bool inited = false;
+	bool doOnce = false;
 public:
 	bool flip = false;
 	const char* filePath = "./resources/placeholder/error.png";
 	inline void setVisiblity(bool visibility) { visible = visibility; }
 	inline void start(SDL_Renderer* renderer)
 	{
-		img.setPath(filePath);
-		img.initImage(renderer);
-		inited = true;
+		if (doOnce == false)
+		{
+			img.setPath(filePath);
+			img.initImage(renderer);
+			inited = true;
+			doOnce = true;
+		}
 	}
 	inline void update(SDL_Renderer* renderer)
 	{
@@ -54,8 +59,8 @@ public:
 				{
 					this->rect = { (int)entityAssigned->getComponentEX<renderedPosition*>()->position.x,(int)entityAssigned->getComponentEX<renderedPosition*>()->position.y,transform2D->w,transform2D->h };
 				}
-				std::cout << path << std::endl;
 				img.setPath(path);
+				inited = true;
 			}
 		}
 		else {

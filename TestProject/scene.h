@@ -43,7 +43,6 @@ public:
 			{
 				this->currentWorld = scene.second;
 				return true;
-				break;
 			}
 			else {
 			if(currentWorld == scene.second)

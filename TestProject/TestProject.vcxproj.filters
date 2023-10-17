@@ -79,6 +79,12 @@
     <Filter Include="Core\Random">
       <UniqueIdentifier>{60c8445e-4b17-4fea-a614-ec19693886a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Core\FRAMERATE">
+      <UniqueIdentifier>{45b6fe62-7ce6-4f20-b878-e90efe0db762}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\fileSystem">
+      <UniqueIdentifier>{7865abb2-1f51-41c8-a2ed-a36cdd222a21}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui\imgui_stdlib.cpp">
@@ -174,7 +180,9 @@
     <ClCompile Include="audio.cpp">
       <Filter>Core\audio</Filter>
     </ClCompile>
-    <ClCompile Include="numFactory.cpp" />
+    <ClCompile Include="fileSystem.cpp">
+      <Filter>Core\fileSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gMath.hpp">
@@ -495,7 +503,15 @@
     <ClInclude Include="audio.h">
       <Filter>Core\audio</Filter>
     </ClInclude>
-    <ClInclude Include="numFactory.h" />
+    <ClInclude Include="numFactory.h">
+      <Filter>Core\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="frameRate.h">
+      <Filter>Core\FRAMERATE</Filter>
+    </ClInclude>
+    <ClInclude Include="fileSystem.h">
+      <Filter>Core\fileSystem</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\cursor.png">
